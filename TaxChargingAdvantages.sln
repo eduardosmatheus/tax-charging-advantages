@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxChargingAdvantages", "TaxChargingAdvantages\TaxChargingAdvantages.csproj", "{DAFE07C2-209E-48D0-927A-7FAA96361AC0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainProgram", "TaxChargingAdvantages\MainProgram.csproj", "{DAFE07C2-209E-48D0-927A-7FAA96361AC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{705C5A5E-31D8-448D-9E7D-12A8F480C3F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{DAFE07C2-209E-48D0-927A-7FAA96361AC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAFE07C2-209E-48D0-927A-7FAA96361AC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAFE07C2-209E-48D0-927A-7FAA96361AC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{705C5A5E-31D8-448D-9E7D-12A8F480C3F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{705C5A5E-31D8-448D-9E7D-12A8F480C3F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{705C5A5E-31D8-448D-9E7D-12A8F480C3F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{705C5A5E-31D8-448D-9E7D-12A8F480C3F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
