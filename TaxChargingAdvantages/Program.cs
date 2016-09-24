@@ -1,4 +1,6 @@
-﻿using Core;
+﻿using System.Collections.Generic;
+using Core;
+using System;
 
 namespace TaxChargingAdvantages
 {
@@ -12,21 +14,26 @@ namespace TaxChargingAdvantages
             Cooperado cooperado = new Cooperado(2700, 160);
             LoadCooperado(cooperado);
             //TO DO: Logar os resultados.
+            cooperado.calcularValorDeImpostos();
+            cooperado.calcularBeneficios();
+            cooperado.calcularValorHora();
 
             Clt cltEscravo = new Clt(1000, 160);
             LoadClt(cltEscravo);
+            
             //TO DO: Logar os resultados. 
 
             Mei empreendedor = new Mei(2100, 160);
             LoadMei(empreendedor);
-            //TO DO: Logar os resultados.
+            //TO DO: Logar os resultados.*/
+            Console.Read();
         }
 
         private static void LoadCooperado(Cooperado cooperado)
         {
             cooperado.AdicionarTaxa(Taxa.INSS, 11);
             cooperado.AdicionarTaxa(Taxa.IRPF, 17);
-            cooperado.AdicionarTaxa(Taxa.MENSALIDADE, 5);
+            cooperado.AdicionarTaxa(Taxa.Mensalidade, 5);
             cooperado.AdicionarBeneficio(Beneficio.AssistenciaMedica, 200d);
         }
 

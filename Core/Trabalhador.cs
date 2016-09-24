@@ -3,17 +3,11 @@ using System.Collections.Generic;
 
 namespace Core
 {
-    public abstract class Trabalhador : IAssalariavel
+    public abstract class Trabalhador
     {
-        /**
-         * Cada entrada do dicionário deve possuir um Beneficio juntamente a um valor de percentual.
-         */
-        Dictionary<Taxa, double> Taxas { get; set; }
-        /**
-         * Cada entrada do dicionário deve possuir uma Taxa juntamente a um valor de percentual.
-         */
-        Dictionary<Beneficio, double> Beneficios { get; set; }
-
+        protected IDictionary<Taxa, double> Taxas { get; set; }
+        protected IDictionary<Beneficio, double> Beneficios { get; set; }
+        
         public double HorasTrabalhadas { get; set; }
         public double SalarioBruto { get; set; }
 
@@ -25,29 +19,36 @@ namespace Core
             Beneficios = new Dictionary<Beneficio, double>();
         }
 
-        public virtual double calcularValorLiquido()
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual double calcularValorLiquidoComBeneficios()
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual double calcularValorHora()
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual void AdicionarTaxa(Taxa taxa, double valor)
+        public void AdicionarTaxa(Taxa taxa, double valor)
         {
             Taxas.Add(taxa, valor);
         }
 
-        public virtual void AdicionarBeneficio(Beneficio beneficio, double valor)
+        public void AdicionarBeneficio(Beneficio beneficio, double valor)
         {
             Beneficios.Add(beneficio, valor);
+        }
+
+        protected double calcularValorLiquido(double totalDeImpostos)
+        {
+            return SalarioBruto - totalDeImpostos;
+        }
+
+        protected double calcularValorLiquido(double totalDeImpostos, double totalDeBeneficios)
+        {
+            return (SalarioBruto + totalDeBeneficios) - totalDeImpostos;
+        }
+
+        public abstract double calcularValorDeImpostos();
+
+        public abstract double calcularBeneficios();
+
+        /**
+         * Retorna o valor do salário bruto descontado de um percentual recebido.
+         */
+        protected double getValorDescontadoDoSalario(double percentual)
+        {
+            return (SalarioBruto * (percentual / 100));
         }
     }
 }

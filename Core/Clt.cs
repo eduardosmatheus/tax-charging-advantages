@@ -12,14 +12,30 @@ namespace Core
             : base(salarioBruto, horasTrabalhadas)
         {}
 
-        public override double calcularValorLiquido()
+        public override double calcularValorDeImpostos()
         {
-            throw new NotImplementedException("Falta implementar.");
+            double percentualDeInss = 0;
+            double percentualDeImpostoDeRenda = 0;
+            Taxas.TryGetValue(Taxa.INSS, out percentualDeInss);
+            Taxas.TryGetValue(Taxa.IRPF, out percentualDeImpostoDeRenda);
+            Console.WriteLine("Percentuais totalizados: {0}", percentualDeInss + percentualDeImpostoDeRenda);
+
+            double valorDeImpostoDeRenda = SalarioBruto - getValorDescontadoDoSalario(percentualDeImpostoDeRenda);
+            double valorDeInss = SalarioBruto - getValorDescontadoDoSalario(percentualDeInss);
+            return valorDeInss + valorDeImpostoDeRenda;
         }
 
-        public override double calcularValorLiquidoComBeneficios()
+        public override double calcularBeneficios()
         {
-            throw new NotImplementedException("Falta implementar.");
+            double assistenciaMedica = 0;
+            Beneficios.TryGetValue(Beneficio.AssistenciaMedica, out assistenciaMedica);
+            double educacao = 0;
+            Beneficios.TryGetValue(Beneficio.Educacao, out educacao);
+            double seguroDeVida = 0;
+            Beneficios.TryGetValue(Beneficio.SeguroDeVida, out seguroDeVida);
+            double valeRefeicao = 0;
+            Beneficios.TryGetValue(Beneficio.ValeRefeicao, out valeRefeicao);
+            return assistenciaMedica + educacao + seguroDeVida + valeRefeicao;
         }
     }
 }

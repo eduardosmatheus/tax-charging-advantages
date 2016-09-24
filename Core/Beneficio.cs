@@ -9,7 +9,6 @@ namespace Core
     public enum Beneficio
     {
         UNDEFINED,
-        DecimoTerceiro,
         Ferias,
         AssistenciaMedica,
         ValeRefeicao,

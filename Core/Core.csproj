@@ -44,7 +44,7 @@
     <Compile Include="Clt.cs" />
     <Compile Include="Taxa.cs" />
     <Compile Include="Cooperado.cs" />
-    <Compile Include="IAssalariavel.cs" />
+    <Compile Include="IPagavelPorHora.cs" />
     <Compile Include="Mei.cs" />
     <Compile Include="Trabalhador.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

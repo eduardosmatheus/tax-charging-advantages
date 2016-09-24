@@ -12,7 +12,8 @@ namespace Core
         INSS,
         IRPF,
         IRPJ,
+        ISS,
         DAS,
-        MENSALIDADE
+        Mensalidade
     }
 }
