@@ -10,31 +10,18 @@ namespace Core
     {
         public Cooperado(double salarioBruto, double horasTrabalhadas) : base(salarioBruto, horasTrabalhadas) { }
 
-        public override double calcularValorDeImpostos()
+        public override double calcularTotalDeTaxas()
         {
-            double percentualDeInss = 0d;
-            Taxas.TryGetValue(Taxa.INSS, out percentualDeInss);
-            double percentualDeImpostoDeRenda = 0d;
-            Taxas.TryGetValue(Taxa.IRPF, out percentualDeImpostoDeRenda);
-            double percentualAdministrativo = 0d;
-            Taxas.TryGetValue(Taxa.Mensalidade, out percentualAdministrativo);
-            double totalPercentuais = percentualDeInss + percentualDeImpostoDeRenda + percentualAdministrativo;
-            Console.WriteLine("Percentuais totalizados: {0}", totalPercentuais);
+            double valorDeImpostoDeRenda = getValorDescontadoDoSalario(Taxas[Taxa.IRPF]);
+            double valorDeInss = getValorDescontadoDoSalario(Taxas[Taxa.INSS]);
+            double valorDaMensalidade = getValorDescontadoDoSalario(Taxas[Taxa.Mensalidade]);
 
-            double valorDeImpostoDeRenda = getValorDescontadoDoSalario(percentualDeImpostoDeRenda);
-            double valorDeInss = getValorDescontadoDoSalario(percentualDeInss);
-            double valorDaMensalidade = getValorDescontadoDoSalario(percentualAdministrativo);
-            double valorTotalDeImpostos = valorDeInss + valorDeImpostoDeRenda + valorDaMensalidade;
-            Console.WriteLine("Valor total de impostos: {0}", valorTotalDeImpostos);
-            return valorTotalDeImpostos;
+            return valorDeInss + valorDeImpostoDeRenda + valorDaMensalidade;
         }
 
-        public override double calcularBeneficios()
+        public override double calcularTotalDeBeneficios()
         {
-            double assistenciaMedica = 0d;
-            Beneficios.TryGetValue(Beneficio.AssistenciaMedica, out assistenciaMedica);
-            Console.WriteLine("Valor total de beneficios: R${0}", assistenciaMedica);
-            return assistenciaMedica;
+            return Beneficios[Beneficio.AssistenciaMedica];
         }
 
         public double calcularValorHora()

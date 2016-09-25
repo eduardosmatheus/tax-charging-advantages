@@ -6,32 +6,29 @@ namespace Core
     {
         public Mei(double salarioBruto, double horasTrabalhadas) : base(salarioBruto, horasTrabalhadas){ }
 
-        public override double calcularValorDeImpostos()
+        public override double calcularTotalDeTaxas()
         {
-            double percentualDeIss = 0;
-            Taxas.TryGetValue(Taxa.ISS, out percentualDeIss);
+            double valorDeIss = getValorDescontadoDoSalario(Taxas[Taxa.ISS]);
+            double valorIrpj = getValorDescontadoDoSalario(Taxas[Taxa.IRPJ]);
+            double valorDas = Taxas[Taxa.DAS];
 
-            double valorDeIss = getValorDescontadoDoSalario(percentualDeIss);
-
-            double valorDas = 0;
-            Taxas.TryGetValue(Taxa.DAS, out valorDas);
-
-            //TO DO: Retornar os percentuais de forma que possa ser escrito em um output de texto. 
-            double percentualDaDas = valorDas / SalarioBruto;
-
-            return valorDas + valorDeIss;
+            return valorIrpj + valorDeIss + valorDas;
         }
 
-        public override double calcularBeneficios()
+        public override double calcularTotalDeBeneficios()
         {
-            double valorDeAlmoco = 0;
-            Beneficios.TryGetValue(Beneficio.ValeRefeicao, out valorDeAlmoco);
-            return valorDeAlmoco;
+            return Beneficios[Beneficio.ValeRefeicao];
         }
 
         public double calcularValorHora()
         {
             return SalarioBruto / HorasTrabalhadas;
+        }
+
+        public new double getTotalPercentuaisDeImpostos()
+        {
+            double percentualDaDas = Taxas[Taxa.DAS] / SalarioBruto;
+            return Taxas[Taxa.ISS] + Taxas[Taxa.IRPJ] + percentualDaDas;
         }
     }
 }

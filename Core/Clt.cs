@@ -12,30 +12,32 @@ namespace Core
             : base(salarioBruto, horasTrabalhadas)
         {}
 
-        public override double calcularValorDeImpostos()
+        public override double calcularTotalDeTaxas()
         {
-            double percentualDeInss = 0;
-            double percentualDeImpostoDeRenda = 0;
-            Taxas.TryGetValue(Taxa.INSS, out percentualDeInss);
-            Taxas.TryGetValue(Taxa.IRPF, out percentualDeImpostoDeRenda);
-            Console.WriteLine("Percentuais totalizados: {0}", percentualDeInss + percentualDeImpostoDeRenda);
-
-            double valorDeImpostoDeRenda = SalarioBruto - getValorDescontadoDoSalario(percentualDeImpostoDeRenda);
-            double valorDeInss = SalarioBruto - getValorDescontadoDoSalario(percentualDeInss);
+            double valorDeImpostoDeRenda = SalarioBruto - getValorDescontadoDoSalario(Taxas[Taxa.IRPF]);
+            double valorDeInss = SalarioBruto - getValorDescontadoDoSalario(Taxas[Taxa.INSS]);
             return valorDeInss + valorDeImpostoDeRenda;
         }
 
-        public override double calcularBeneficios()
+        public override double calcularTotalDeBeneficios()
         {
-            double assistenciaMedica = 0;
-            Beneficios.TryGetValue(Beneficio.AssistenciaMedica, out assistenciaMedica);
-            double educacao = 0;
-            Beneficios.TryGetValue(Beneficio.Educacao, out educacao);
-            double seguroDeVida = 0;
-            Beneficios.TryGetValue(Beneficio.SeguroDeVida, out seguroDeVida);
-            double valeRefeicao = 0;
-            Beneficios.TryGetValue(Beneficio.ValeRefeicao, out valeRefeicao);
+            double assistenciaMedica = Beneficios[Beneficio.AssistenciaMedica];
+            double educacao = Beneficios[Beneficio.Educacao];
+            double seguroDeVida = Beneficios[Beneficio.SeguroDeVida];
+            double valeRefeicao = Beneficios[Beneficio.ValeRefeicao];
+
             return assistenciaMedica + educacao + seguroDeVida + valeRefeicao;
+        }
+
+        public double calcularFerias(double totalDeImpostos)
+        {
+            double salarioBrutoMaisUmTerco = SalarioBruto + (SalarioBruto / 3);
+            return (salarioBrutoMaisUmTerco - totalDeImpostos) / 12;
+        }
+
+        public double calcularDecimoTerceiro(double totalDeImpostos)
+        {
+            return (SalarioBruto - totalDeImpostos) / 12;
         }
     }
 }

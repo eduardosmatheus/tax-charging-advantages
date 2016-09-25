@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Core
 {
     public abstract class Trabalhador
     {
-        protected IDictionary<Taxa, double> Taxas { get; set; }
-        protected IDictionary<Beneficio, double> Beneficios { get; set; }
+        public IDictionary<Taxa, double> Taxas { get; private set; }
+        public IDictionary<Beneficio, double> Beneficios { get; private set; }
         
         public double HorasTrabalhadas { get; set; }
         public double SalarioBruto { get; set; }
@@ -29,19 +31,19 @@ namespace Core
             Beneficios.Add(beneficio, valor);
         }
 
-        protected double calcularValorLiquido(double totalDeImpostos)
+        public double calcularSalarioLiquido(double totalDeImpostos)
         {
             return SalarioBruto - totalDeImpostos;
         }
 
-        protected double calcularValorLiquido(double totalDeImpostos, double totalDeBeneficios)
+        public double calcularSalarioLiquido(double totalDeImpostos, double totalDeBeneficios)
         {
             return (SalarioBruto + totalDeBeneficios) - totalDeImpostos;
         }
 
-        public abstract double calcularValorDeImpostos();
+        public abstract double calcularTotalDeTaxas();
 
-        public abstract double calcularBeneficios();
+        public abstract double calcularTotalDeBeneficios();
 
         /**
          * Retorna o valor do salário bruto descontado de um percentual recebido.
@@ -49,6 +51,11 @@ namespace Core
         protected double getValorDescontadoDoSalario(double percentual)
         {
             return (SalarioBruto * (percentual / 100));
+        }
+
+        public virtual double getTotalPercentuaisDeTaxas()
+        {
+            return (from d in Taxas.Values select d).Sum();
         }
     }
 }

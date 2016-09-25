@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using Core;
 using System;
+using System.IO;
 
 namespace TaxChargingAdvantages
 {
-    /**
-     * Bom dia.
-     */
     class Tester
     {
         static void Main(string[] args)
@@ -14,9 +12,6 @@ namespace TaxChargingAdvantages
             Cooperado cooperado = new Cooperado(2700, 160);
             LoadCooperado(cooperado);
             //TO DO: Logar os resultados.
-            cooperado.calcularValorDeImpostos();
-            cooperado.calcularBeneficios();
-            cooperado.calcularValorHora();
 
             Clt cltEscravo = new Clt(1000, 160);
             LoadClt(cltEscravo);
@@ -25,7 +20,7 @@ namespace TaxChargingAdvantages
 
             Mei empreendedor = new Mei(2100, 160);
             LoadMei(empreendedor);
-            //TO DO: Logar os resultados.*/
+            //TO DO: Logar os resultados.
             Console.Read();
         }
 
@@ -53,5 +48,4 @@ namespace TaxChargingAdvantages
             mei.AdicionarBeneficio(Beneficio.ValeRefeicao, 320d);
         }
     }
-
 }
