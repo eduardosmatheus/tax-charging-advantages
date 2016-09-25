@@ -8,21 +8,26 @@ namespace Core
 {
     public class Cooperado : Trabalhador
     {
-        public Cooperado(double salarioBruto, double horasTrabalhadas) 
+        public Cooperado(decimal salarioBruto, decimal horasTrabalhadas) 
             : base(salarioBruto, horasTrabalhadas) { }
 
-        public override double calcularTotalDeTaxas()
+        public override decimal calcularTotalDeTaxas()
         {
-            double valorDeImpostoDeRenda = getValorDescontadoDoSalario(Taxas[Taxa.IRPF]);
-            double valorDeInss = getValorDescontadoDoSalario(Taxas[Taxa.INSS]);
-            double valorDaMensalidade = getValorDescontadoDoSalario(Taxas[Taxa.Mensalidade]);
+            decimal valorDeImpostoDeRenda = getValorDescontadoDoSalario(Taxas[Taxa.IRPF]);
+            decimal valorDeInss = getValorDescontadoDoSalario(Taxas[Taxa.INSS]);
+            decimal valorDaMensalidade = getValorDescontadoDoSalario(Taxas[Taxa.Mensalidade]);
 
             return valorDeInss + valorDeImpostoDeRenda + valorDaMensalidade;
         }
 
-        public override double calcularTotalDeBeneficios()
+        public override decimal calcularTotalDeBeneficios()
         {
             return Beneficios[Beneficio.AssistenciaMedica];
+        }
+
+        public override decimal calcularValorHora()
+        {
+            return SalarioBruto / HorasTrabalhadas;
         }
     }
 }

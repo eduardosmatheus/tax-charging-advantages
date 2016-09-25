@@ -5,62 +5,60 @@ using System.Linq;
 
 namespace Core
 {
-    public abstract class Trabalhador : IPagavel
+    public abstract class Trabalhador
     {
-        public IDictionary<Taxa, double> Taxas { get; private set; }
-        public IDictionary<Beneficio, double> Beneficios { get; private set; }
+        public Dictionary<Taxa, decimal> Taxas { get; private set; }
+        public Dictionary<Beneficio, decimal> Beneficios { get; private set; }
         
-        public double HorasTrabalhadas { get; set; }
-        public double SalarioBruto { get; set; }
+        public decimal HorasTrabalhadas { get; set; }
+        public decimal SalarioBruto { get; set; }
 
-        public Trabalhador(double salarioBruto, double horasTrabalhadas)
+        public Trabalhador(decimal salarioBruto, decimal horasTrabalhadas)
         {
             SalarioBruto = salarioBruto;
             HorasTrabalhadas = horasTrabalhadas;
-            Taxas = new Dictionary<Taxa, double>();
-            Beneficios = new Dictionary<Beneficio, double>();
+            Taxas = new Dictionary<Taxa, decimal>();
+            Beneficios = new Dictionary<Beneficio, decimal>();
         }
 
-        public void AdicionarTaxa(Taxa taxa, double valor)
+        public void AdicionarTaxa(Taxa taxa, decimal valor)
         {
             Taxas.Add(taxa, valor);
         }
 
-        public void AdicionarBeneficio(Beneficio beneficio, double valor)
+        public void AdicionarBeneficio(Beneficio beneficio, decimal valor)
         {
             Beneficios.Add(beneficio, valor);
         }
 
-        public double calcularSalarioLiquido(double totalDeImpostos)
+        public decimal calcularSalarioLiquido(decimal totalDeImpostos)
         {
             return SalarioBruto - totalDeImpostos;
         }
 
-        public double calcularSalarioLiquido(double totalDeImpostos, double totalDeBeneficios)
+        public decimal calcularSalarioLiquido(decimal totalDeImpostos, decimal totalDeBeneficios)
         {
             return (SalarioBruto + totalDeBeneficios) - totalDeImpostos;
         }
 
-        public abstract double calcularTotalDeTaxas();
+        public abstract decimal calcularTotalDeTaxas();
 
-        public abstract double calcularTotalDeBeneficios();
+        public abstract decimal calcularTotalDeBeneficios();
+
+        public abstract decimal calcularValorHora();
 
         /**
          * Retorna o valor do salário bruto descontado de um percentual recebido.
          */
-        protected double getValorDescontadoDoSalario(double percentual)
+        protected decimal getValorDescontadoDoSalario(decimal percentual)
         {
             return (SalarioBruto * (percentual / 100));
         }
 
-        public virtual double getTotalPercentuaisDeTaxas()
+        public virtual decimal getTotalPercentuaisDeTaxas()
         {
             return (from d in Taxas.Values select d).Sum();
         }
 
-        public virtual double calcularValorHora()
-        {
-            return 0;
-        }
     }
 }

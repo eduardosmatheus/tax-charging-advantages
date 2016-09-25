@@ -4,30 +4,30 @@ namespace Core
 {
     public class Mei : Trabalhador
     {
-        public Mei(double salarioBruto, double horasTrabalhadas) : base(salarioBruto, horasTrabalhadas){ }
+        public Mei(decimal salarioBruto, decimal horasTrabalhadas) : base(salarioBruto, horasTrabalhadas){ }
 
-        public override double calcularTotalDeTaxas()
+        public override decimal calcularTotalDeTaxas()
         {
-            double valorDeIss = getValorDescontadoDoSalario(Taxas[Taxa.ISS]);
-            double valorIrpj = getValorDescontadoDoSalario(Taxas[Taxa.IRPJ]);
-            double valorDas = Taxas[Taxa.DAS];
+            decimal valorDeIss = getValorDescontadoDoSalario(Taxas[Taxa.ISS]);
+            decimal valorIrpj = getValorDescontadoDoSalario(Taxas[Taxa.IRPJ]);
+            decimal valorDas = Taxas[Taxa.DAS];
 
             return valorIrpj + valorDeIss + valorDas;
         }
 
-        public override double calcularTotalDeBeneficios()
+        public override decimal calcularTotalDeBeneficios()
         {
             return Beneficios[Beneficio.ValeRefeicao];
         }
 
-        public override double calcularValorHora()
+        public override decimal calcularValorHora()
         {
             return SalarioBruto / HorasTrabalhadas;
         }
 
-        public new double getTotalPercentuaisDeTaxas()
+        public new decimal getTotalPercentuaisDeTaxas()
         {
-            double percentualDaDas = Taxas[Taxa.DAS] / SalarioBruto;
+            decimal percentualDaDas = Taxas[Taxa.DAS] / SalarioBruto;
             return Taxas[Taxa.ISS] + Taxas[Taxa.IRPJ] + percentualDaDas;
         }
     }

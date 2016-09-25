@@ -8,40 +8,46 @@ namespace Core
 {
     public class Clt : Trabalhador
     {
-        public Clt(double salarioBruto, double horasTrabalhadas) 
+        public Clt(decimal salarioBruto, decimal horasTrabalhadas) 
             : base(salarioBruto, horasTrabalhadas)
         {}
 
-        public override double calcularTotalDeTaxas()
+        public override decimal calcularTotalDeTaxas()
         {
-            double valorDeImpostoDeRenda = SalarioBruto - getValorDescontadoDoSalario(Taxas[Taxa.IRPF]);
-            double valorDeInss = SalarioBruto - getValorDescontadoDoSalario(Taxas[Taxa.INSS]);
+            decimal valorDeImpostoDeRenda = getValorDescontadoDoSalario(Taxas[Taxa.IRPF]);
+            decimal valorDeInss = getValorDescontadoDoSalario(Taxas[Taxa.INSS]);
             return valorDeInss + valorDeImpostoDeRenda;
         }
 
-        public override double calcularTotalDeBeneficios()
+        public override decimal calcularTotalDeBeneficios()
         {
-            double assistenciaMedica = Beneficios[Beneficio.AssistenciaMedica];
-            double educacao = Beneficios[Beneficio.Educacao];
-            double seguroDeVida = Beneficios[Beneficio.SeguroDeVida];
-            double valeRefeicao = Beneficios[Beneficio.ValeRefeicao];
-
-            return assistenciaMedica + educacao + seguroDeVida + valeRefeicao;
+            decimal assistenciaMedica = Beneficios[Beneficio.AssistenciaMedica];
+            decimal educacao = Beneficios[Beneficio.Educacao];
+            decimal seguroDeVida = Beneficios[Beneficio.SeguroDeVida];
+            decimal valeRefeicao = Beneficios[Beneficio.ValeRefeicao];
+            decimal decimoTerceiro = calcularDecimoTerceiro();
+            decimal ferias = calcularFerias();
+            return (assistenciaMedica + educacao + seguroDeVida + valeRefeicao) + Math.Ceiling(decimoTerceiro + ferias);
         }
 
-        public double calcularFerias(double totalDeImpostos)
+        private decimal calcularFerias()
         {
-            double salarioBrutoMaisUmTerco = SalarioBruto + (SalarioBruto / 3);
-            double valorDasFerias = (salarioBrutoMaisUmTerco - totalDeImpostos) / 12;
+            decimal salarioBrutoMaisUmTerco = Math.Round(SalarioBruto + (SalarioBruto / 3), 2);
+            decimal valorDasFerias = Math.Round((salarioBrutoMaisUmTerco - calcularTotalDeTaxas()) / 12, 2);
             AdicionarBeneficio(Beneficio.Ferias, valorDasFerias);
             return valorDasFerias;
         }
 
-        public double calcularDecimoTerceiro(double totalDeImpostos)
+        private decimal calcularDecimoTerceiro()
         {
-            double decimoTerceiro = (SalarioBruto - totalDeImpostos) / 12;
+            decimal decimoTerceiro = Math.Round((SalarioBruto - calcularTotalDeTaxas()) / 12, 2);
             AdicionarBeneficio(Beneficio.DecimoTerceiro, decimoTerceiro);
             return decimoTerceiro;
+        }
+
+        public override decimal calcularValorHora()
+        {
+            return 0;
         }
     }
 }
