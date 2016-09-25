@@ -2,7 +2,7 @@
 
 namespace Core
 {
-    public class Mei : Trabalhador, IPagavelPorHora
+    public class Mei : Trabalhador
     {
         public Mei(double salarioBruto, double horasTrabalhadas) : base(salarioBruto, horasTrabalhadas){ }
 
@@ -20,12 +20,12 @@ namespace Core
             return Beneficios[Beneficio.ValeRefeicao];
         }
 
-        public double calcularValorHora()
+        public override double calcularValorHora()
         {
             return SalarioBruto / HorasTrabalhadas;
         }
 
-        public new double getTotalPercentuaisDeImpostos()
+        public new double getTotalPercentuaisDeTaxas()
         {
             double percentualDaDas = Taxas[Taxa.DAS] / SalarioBruto;
             return Taxas[Taxa.ISS] + Taxas[Taxa.IRPJ] + percentualDaDas;

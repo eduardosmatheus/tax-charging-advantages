@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Core
 {
-    public class Cooperado : Trabalhador, IPagavelPorHora
+    public class Cooperado : Trabalhador
     {
-        public Cooperado(double salarioBruto, double horasTrabalhadas) : base(salarioBruto, horasTrabalhadas) { }
+        public Cooperado(double salarioBruto, double horasTrabalhadas) 
+            : base(salarioBruto, horasTrabalhadas) { }
 
         public override double calcularTotalDeTaxas()
         {
@@ -22,11 +23,6 @@ namespace Core
         public override double calcularTotalDeBeneficios()
         {
             return Beneficios[Beneficio.AssistenciaMedica];
-        }
-
-        public double calcularValorHora()
-        {
-            return SalarioBruto / HorasTrabalhadas;
         }
     }
 }

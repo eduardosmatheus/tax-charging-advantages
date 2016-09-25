@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Core
 {
-    public abstract class Trabalhador
+    public abstract class Trabalhador : IPagavel
     {
         public IDictionary<Taxa, double> Taxas { get; private set; }
         public IDictionary<Beneficio, double> Beneficios { get; private set; }
@@ -56,6 +56,11 @@ namespace Core
         public virtual double getTotalPercentuaisDeTaxas()
         {
             return (from d in Taxas.Values select d).Sum();
+        }
+
+        public virtual double calcularValorHora()
+        {
+            return 0;
         }
     }
 }

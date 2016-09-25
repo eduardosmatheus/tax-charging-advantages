@@ -9,18 +9,21 @@ namespace TaxChargingAdvantages
     {
         static void Main(string[] args)
         {
+            Escritor escritor = new Escritor(Directory.GetCurrentDirectory());
+
             Cooperado cooperado = new Cooperado(2700, 160);
             LoadCooperado(cooperado);
-            //TO DO: Logar os resultados.
+            escritor.Inserir(cooperado);
 
             Clt cltEscravo = new Clt(1000, 160);
             LoadClt(cltEscravo);
-            
-            //TO DO: Logar os resultados. 
+            escritor.Inserir(cltEscravo);
 
             Mei empreendedor = new Mei(2100, 160);
             LoadMei(empreendedor);
-            //TO DO: Logar os resultados.
+            escritor.Inserir(empreendedor);
+
+            escritor.Close();
             Console.Read();
         }
 

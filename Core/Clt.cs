@@ -32,12 +32,16 @@ namespace Core
         public double calcularFerias(double totalDeImpostos)
         {
             double salarioBrutoMaisUmTerco = SalarioBruto + (SalarioBruto / 3);
-            return (salarioBrutoMaisUmTerco - totalDeImpostos) / 12;
+            double valorDasFerias = (salarioBrutoMaisUmTerco - totalDeImpostos) / 12;
+            AdicionarBeneficio(Beneficio.Ferias, valorDasFerias);
+            return valorDasFerias;
         }
 
         public double calcularDecimoTerceiro(double totalDeImpostos)
         {
-            return (SalarioBruto - totalDeImpostos) / 12;
+            double decimoTerceiro = (SalarioBruto - totalDeImpostos) / 12;
+            AdicionarBeneficio(Beneficio.DecimoTerceiro, decimoTerceiro);
+            return decimoTerceiro;
         }
     }
 }

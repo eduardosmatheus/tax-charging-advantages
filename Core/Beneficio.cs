@@ -10,6 +10,7 @@ namespace Core
     {
         UNDEFINED,
         Ferias,
+        DecimoTerceiro,
         AssistenciaMedica,
         ValeRefeicao,
         SeguroDeVida,
