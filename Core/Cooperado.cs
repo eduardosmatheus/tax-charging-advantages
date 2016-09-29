@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core
 {
-    public class Cooperado : Trabalhador
+    public class Cooperado : ContratoDeTrabalho
     {
         public Cooperado(decimal salarioBruto, decimal horasTrabalhadas) 
             : base(salarioBruto, horasTrabalhadas) { }

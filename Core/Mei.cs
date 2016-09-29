@@ -2,7 +2,7 @@
 
 namespace Core
 {
-    public class Mei : Trabalhador
+    public class Mei : ContratoDeTrabalho
     {
         public Mei(decimal salarioBruto, decimal horasTrabalhadas) : base(salarioBruto, horasTrabalhadas){ }
 

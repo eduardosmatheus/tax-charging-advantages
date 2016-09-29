@@ -10,14 +10,8 @@ namespace TaxChargingAdvantages
 {
     class Escritor
     {
-        StreamWriter escritor;
 
-        public Escritor(string caminhoDeEscrita)
-        {
-            escritor = new StreamWriter(caminhoDeEscrita);
-        }
-
-        public void Inserir(Trabalhador trabalhador)
+        public static void ImprimirDados(TextWriter escritor, ContratoDeTrabalho trabalhador)
         {
             escritor.WriteLine("************{0}************", trabalhador.GetType().ToString());
             escritor.WriteLine("Taxas e incidentes: ");
@@ -33,22 +27,17 @@ namespace TaxChargingAdvantages
                 escritor.WriteLine(">>{0} : R${1}", beneficio.Key, beneficio.Value);
             });
 
-            double totalDeTaxas = trabalhador.calcularTotalDeTaxas();
-            double totalDeBeneficios = trabalhador.calcularTotalDeBeneficios();
+            decimal totalDeTaxas = trabalhador.calcularTotalDeTaxas();
+            decimal totalDeBeneficios = trabalhador.calcularTotalDeBeneficios();
             escritor.WriteLine("Valor Total de taxas: R${0}", totalDeTaxas);
             escritor.WriteLine("% Total de taxas: {0}%", trabalhador.getTotalPercentuaisDeTaxas());
             escritor.WriteLine("Valor Total de benefícios: R${0}", totalDeBeneficios);
-            double valorHora = trabalhador.calcularValorHora();
+            decimal valorHora = trabalhador.calcularValorHora();
             escritor.WriteLine("Valor hora: {0}", (valorHora == 0 ? "Não há" : valorHora.ToString()));
             escritor.WriteLine("Salário líquido: R${0}", trabalhador.calcularSalarioLiquido(totalDeTaxas));
             escritor.WriteLine("Salário líquido (com benefícios): R${0}", trabalhador.calcularSalarioLiquido(totalDeTaxas, totalDeBeneficios));
             escritor.WriteLine();
             escritor.WriteLine("**********************");
-        }
-
-        public void Close()
-        {
-            escritor.Close();
         }
     }
 }

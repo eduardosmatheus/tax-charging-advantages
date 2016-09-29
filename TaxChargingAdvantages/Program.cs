@@ -10,23 +10,26 @@ namespace TaxChargingAdvantages
     {
         static void Main(string[] args)
         {
-            //Escritor escritor = new Escritor(Directory.GetDirectoryRoot(Directory.GetCurrentDirectory()));
-
+            string path = @"C\\Users\\mathe\\Desktop\\res.txt";
+            TextWriter writer = new StreamWriter(path, true);
             Cooperado cooperado = new Cooperado(2700, 160);
             LoadCooperado(cooperado);
-            imprimir(cooperado);
+            //imprimir(cooperado);
             
             Clt clt = new Clt(1000, 160);
             LoadClt(clt);
-            imprimir(clt);
-            //escritor.Inserir(cltEscravo);
+            //imprimir(clt);
+            Escritor.ImprimirDados(writer, clt);
 
             Mei empreendedor = new Mei(2100, 160);
             LoadMei(empreendedor);
-            imprimir(empreendedor);
-            /*escritor.Inserir(empreendedor);*/
+            //imprimir(empreendedor);
+            Escritor.ImprimirDados(writer, empreendedor);
 
-            //escritor.Close();
+            writer.Flush();
+            writer.Dispose();
+            writer.Close();
+            //File.WriteAllLines(path, writer.);
             Console.Read();
         }
 
@@ -56,7 +59,7 @@ namespace TaxChargingAdvantages
             mei.AdicionarBeneficio(Beneficio.ValeRefeicao, 320m);
         }
 
-        static void imprimir(Trabalhador trabalhador)
+        static void imprimir(ContratoDeTrabalho trabalhador)
         {
             decimal totalDeTaxas = Math.Round(trabalhador.calcularTotalDeTaxas());
             decimal totalDeBeneficios = trabalhador.calcularTotalDeBeneficios();

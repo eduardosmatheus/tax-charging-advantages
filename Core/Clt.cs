@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core
 {
-    public class Clt : Trabalhador
+    public class Clt : ContratoDeTrabalho
     {
         public Clt(decimal salarioBruto, decimal horasTrabalhadas) 
             : base(salarioBruto, horasTrabalhadas)
