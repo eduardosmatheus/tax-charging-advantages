@@ -45,7 +45,7 @@
     <Compile Include="Taxa.cs" />
     <Compile Include="Cooperado.cs" />
     <Compile Include="Mei.cs" />
-    <Compile Include="Trabalhador.cs" />
+    <Compile Include="Contrato.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

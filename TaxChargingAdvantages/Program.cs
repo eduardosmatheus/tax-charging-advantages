@@ -11,7 +11,7 @@ namespace TaxChargingAdvantages
         static void Main(string[] args)
         {
             string path = @"Resultado.txt";
-            TextWriter writer = new StreamWriter(path, true);
+            TextWriter writer = new StreamWriter(path, false);
             Cooperado cooperado = new Cooperado(2700, 160);
             LoadCooperado(cooperado);
             Escritor.ImprimirDados(writer, cooperado);
@@ -24,6 +24,7 @@ namespace TaxChargingAdvantages
             LoadMei(empreendedor);
             Escritor.ImprimirDados(writer, empreendedor);
 
+            
             writer.Flush();
             writer.Dispose();
             writer.Close();

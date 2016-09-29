@@ -17,16 +17,23 @@ namespace TaxChargingAdvantages
             escritor.WriteLine("Taxas e incidentes: ");
             trabalhador.Taxas.ToList().ForEach(taxa =>
             {
-                escritor.WriteLine(">>{0} : {1}", taxa.Key, taxa.Value);
+                if (taxa.Key.Equals(Taxa.DAS))
+                {
+                    escritor.WriteLine(">>  {0} : R${1}", taxa.Key, taxa.Value);
+                    escritor.WriteLine(">>  {0} : {1}%", taxa.Key, trabalhador.getPercentualDoImposto(Taxa.DAS));
+                }
+                else
+                    escritor.WriteLine(">> {0} : {1}", taxa.Key, taxa.Value);
             });
             
             escritor.WriteLine();
             escritor.WriteLine("Benefícios: ");
             trabalhador.Beneficios.ToList().ForEach(beneficio =>
             {
-                escritor.WriteLine(">>{0} : R${1}", beneficio.Key, beneficio.Value);
+                escritor.WriteLine(">>  {0} : R${1}", beneficio.Key, beneficio.Value);
             });
 
+            escritor.WriteLine();
             decimal totalDeTaxas = trabalhador.calcularTotalDeTaxas();
             decimal totalDeBeneficios = trabalhador.calcularTotalDeBeneficios();
             escritor.WriteLine("Valor Total de taxas: R${0}", totalDeTaxas);
@@ -34,8 +41,8 @@ namespace TaxChargingAdvantages
             escritor.WriteLine("Valor Total de benefícios: R${0}", totalDeBeneficios);
             decimal valorHora = trabalhador.calcularValorHora();
             escritor.WriteLine("Valor hora: {0}", (valorHora == 0 ? "Não há" : valorHora.ToString()));
-            escritor.WriteLine("Salário líquido: R${0}", trabalhador.calcularSalarioLiquido(totalDeTaxas));
-            escritor.WriteLine("Salário líquido (com benefícios): R${0}", trabalhador.calcularSalarioLiquido(totalDeTaxas, totalDeBeneficios));
+            escritor.WriteLine("Salário líquido: R${0}", trabalhador.calcularSalarioLiquido());
+            escritor.WriteLine("Salário líquido (com benefícios): R${0}", trabalhador.calcularSalarioLiquidoComBeneficios());
             escritor.WriteLine();
             escritor.WriteLine("**********************");
         }

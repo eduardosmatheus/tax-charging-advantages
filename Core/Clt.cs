@@ -12,6 +12,25 @@ namespace Core
             : base(salarioBruto, horasTrabalhadas)
         {}
 
+        public override void AdicionarBeneficio(Beneficio beneficio, decimal valor)
+        {
+            if(beneficio.Equals(Beneficio.AssistenciaMedica)
+                || beneficio.Equals(Beneficio.DecimoTerceiro)
+                || beneficio.Equals(Beneficio.Educacao) 
+                || beneficio.Equals(Beneficio.Ferias)
+                || beneficio.Equals(Beneficio.SeguroDeVida) 
+                || beneficio.Equals(Beneficio.ValeRefeicao))
+            {
+                base.AdicionarBeneficio(beneficio, valor);
+            }
+        }
+
+        public override void AdicionarTaxa(Taxa taxa, decimal valor)
+        {
+            if(taxa.Equals(Taxa.INSS) || taxa.Equals(Taxa.IRPF))
+                base.AdicionarTaxa(taxa, valor);
+        }
+
         public override decimal calcularTotalDeTaxas()
         {
             decimal valorDeImpostoDeRenda = getValorDescontadoDoSalario(Taxas[Taxa.IRPF]);

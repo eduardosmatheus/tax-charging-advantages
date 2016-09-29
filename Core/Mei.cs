@@ -15,6 +15,20 @@ namespace Core
             return valorIrpj + valorDeIss + valorDas;
         }
 
+        public override void AdicionarBeneficio(Beneficio beneficio, decimal valor)
+        {
+            if (!beneficio.Equals(Beneficio.ValeRefeicao))
+                return;
+            base.AdicionarBeneficio(beneficio, valor);
+        }
+
+        public override void AdicionarTaxa(Taxa taxa, decimal valor)
+        {
+            if (taxa.Equals(Taxa.DAS) || taxa.Equals(Taxa.IRPJ) 
+                || taxa.Equals(Taxa.INSS) || taxa.Equals(Taxa.ISS))
+                base.AdicionarTaxa(taxa, valor);
+        }
+
         public override decimal calcularTotalDeBeneficios()
         {
             return Beneficios[Beneficio.ValeRefeicao];
@@ -27,8 +41,21 @@ namespace Core
 
         public new decimal getTotalPercentuaisDeTaxas()
         {
-            decimal percentualDaDas = Taxas[Taxa.DAS] / SalarioBruto;
+            decimal percentualDaDas = getPercentualDoDAS();
             return Taxas[Taxa.ISS] + Taxas[Taxa.IRPJ] + percentualDaDas;
+        }
+
+        public override decimal getPercentualDoImposto(Taxa taxa)
+        {
+            if (taxa.Equals(Taxa.DAS))
+                return Math.Round(getPercentualDoDAS() * 100, 2);
+
+            return Taxas[taxa];
+        }
+
+        private decimal getPercentualDoDAS()
+        {
+            return Taxas[Taxa.DAS] / SalarioBruto;
         }
     }
 }
