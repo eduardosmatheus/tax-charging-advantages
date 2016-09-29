@@ -13,7 +13,7 @@ namespace TaxChargingAdvantages
 
         public static void ImprimirDados(TextWriter escritor, ContratoDeTrabalho trabalhador)
         {
-            escritor.WriteLine("************{0}************", trabalhador.GetType().ToString());
+            escritor.WriteLine("************ {0} ************", trabalhador.GetType().ToString());
             escritor.WriteLine("Taxas e incidentes: ");
             trabalhador.Taxas.ToList().ForEach(taxa =>
             {
