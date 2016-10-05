@@ -10,24 +10,28 @@ namespace TaxChargingAdvantages
     {
         static void Main(string[] args)
         {
-            string path = @"Resultado.txt";
+            string path = string.Format(@"C:\Users\{0}\Desktop\Matheus Eduardo - Resultado Da Parcial 1.txt", Environment.UserName);
             TextWriter writer = new StreamWriter(path, false);
             Cooperado cooperado = new Cooperado(2700, 160);
             LoadCooperado(cooperado);
+            Console.WriteLine("Aguarde, gerando informações do Cooperado...");
             Escritor.ImprimirDados(writer, cooperado);
 
             Clt clt = new Clt(1000, 160);
             LoadClt(clt);
+            Console.WriteLine("Aguarde, gerando informações do Clt...");
             Escritor.ImprimirDados(writer, clt);
 
             Mei empreendedor = new Mei(2100, 160);
             LoadMei(empreendedor);
+            Console.WriteLine("Aguarde, gerando informações do Mei...");
             Escritor.ImprimirDados(writer, empreendedor);
 
             
             writer.Flush();
             writer.Dispose();
             writer.Close();
+            Console.WriteLine("O arquivo com os resultados foi gerado em {0}", path);
             Console.Read();
         }
 

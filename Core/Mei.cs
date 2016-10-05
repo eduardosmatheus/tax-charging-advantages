@@ -39,13 +39,12 @@ namespace Core
             return SalarioBruto / HorasTrabalhadas;
         }
 
-        public new decimal getTotalPercentuaisDeTaxas()
+        public override decimal calcularTotalDosPercentuaisDeTaxas()
         {
-            decimal percentualDaDas = getPercentualDoDAS();
-            return Taxas[Taxa.ISS] + Taxas[Taxa.IRPJ] + percentualDaDas;
+            return Taxas[Taxa.ISS] + Taxas[Taxa.IRPJ] + Math.Round(getPercentualDoDAS(), 2);
         }
 
-        public override decimal getPercentualDoImposto(Taxa taxa)
+        public override decimal getPercentualDaTaxa(Taxa taxa)
         {
             if (taxa.Equals(Taxa.DAS))
                 return Math.Round(getPercentualDoDAS() * 100, 2);

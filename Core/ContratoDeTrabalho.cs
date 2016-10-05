@@ -21,24 +21,41 @@ namespace Core
             Beneficios = new Dictionary<Beneficio, decimal>();
         }
 
-        public void AdicionarTaxa(Taxa taxa, decimal valor)
+        public virtual void AdicionarTaxa(Taxa taxa, decimal valor)
         {
-            Taxas.Add(taxa, valor);
+            if(!Taxas.ContainsKey(taxa))
+                Taxas.Add(taxa, valor);
         }
 
-        public void AdicionarBeneficio(Beneficio beneficio, decimal valor)
+        public virtual void AdicionarBeneficio(Beneficio beneficio, decimal valor)
         {
-            Beneficios.Add(beneficio, valor);
+            if(!Beneficios.ContainsKey(beneficio))
+                Beneficios.Add(beneficio, valor);
         }
 
-        public decimal calcularSalarioLiquido(decimal totalDeImpostos)
+        public decimal calcularSalarioLiquido()
         {
-            return SalarioBruto - totalDeImpostos;
+            return SalarioBruto - calcularTotalDeTaxas();
         }
 
-        public decimal calcularSalarioLiquido(decimal totalDeImpostos, decimal totalDeBeneficios)
+        public decimal calcularSalarioLiquidoComBeneficios()
         {
-            return (SalarioBruto + totalDeBeneficios) - totalDeImpostos;
+            return (SalarioBruto + calcularTotalDeBeneficios()) - calcularTotalDeTaxas();
+        }
+
+        protected decimal getValorDescontadoDoSalario(decimal percentual)
+        {
+            return (SalarioBruto * (percentual / 100));
+        }
+
+        public virtual decimal calcularTotalDosPercentuaisDeTaxas()
+        {
+            return (from d in Taxas.Values select d).Sum();
+        }
+
+        public virtual decimal getPercentualDaTaxa(Taxa taxa)
+        {
+            return Taxas[taxa];
         }
 
         public abstract decimal calcularTotalDeTaxas();
@@ -46,19 +63,6 @@ namespace Core
         public abstract decimal calcularTotalDeBeneficios();
 
         public abstract decimal calcularValorHora();
-
-        /**
-         * Retorna o valor do salário bruto descontado de um percentual recebido.
-         */
-        protected decimal getValorDescontadoDoSalario(decimal percentual)
-        {
-            return (SalarioBruto * (percentual / 100));
-        }
-
-        public virtual decimal getTotalPercentuaisDeTaxas()
-        {
-            return (from d in Taxas.Values select d).Sum();
-        }
 
     }
 }
