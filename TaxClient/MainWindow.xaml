@@ -1,0 +1,30 @@
+﻿<Window x:Class="TaxClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaxClient"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Height="36" Margin="426,273,0,0" VerticalAlignment="Top" Width="81"/>
+        <Label x:Name="label" Content="Nome Completo" HorizontalAlignment="Left" Height="25" Margin="12,10,0,0" VerticalAlignment="Top" Width="153"/>
+        <TextBox x:Name="NomeCompleto" HorizontalAlignment="Left" Height="22" Margin="12,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153"/>
+        <TextBox x:Name="SalarioBruto" HorizontalAlignment="Left" Height="24" Margin="12,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153" TextChanged="SalarioBruto_TextChanged"/>
+        <Label x:Name="label1" Content="Salário Bruto" HorizontalAlignment="Left" Height="25" Margin="12,74,0,0" VerticalAlignment="Top" Width="153"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="24" Margin="170,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153" TextChanged="HorasTrabalhadas_TextChanged"/>
+        <Label x:Name="label2" Content="Horas Trabalhadas" HorizontalAlignment="Left" Margin="170,74,0,0" VerticalAlignment="Top" Width="153"/>
+        <ComboBox x:Name="comboBox" 
+                  HorizontalAlignment="Left" 
+                  Height="25" 
+                  Margin="12,152,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="153" 
+                  SelectionChanged="comboBox_SelectionChanged">
+            <ComboBoxItem>Oi</ComboBoxItem>
+            <ComboBoxItem>Oi Bom dia</ComboBoxItem>
+            <ComboBoxItem>Oi Tudo bem</ComboBoxItem>
+        </ComboBox>
+
+    </Grid>
+</Window>
